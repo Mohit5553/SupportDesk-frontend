@@ -13,6 +13,7 @@ import { PriorityBadge, StatusBadge } from '../components/ui/Badge';
 import { formatDate, timeAgo, formatFileSize, getSlaStatus } from '../lib/utils';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Avatar from '../components/ui/Avatar';
+import { API_ORIGIN } from '../lib/config';
 
 const TicketDetail = () => {
     const { id } = useParams();
@@ -27,8 +28,6 @@ const TicketDetail = () => {
     // Feedback State
     const [rating, setRating] = useState(0);
     const [feedbackComment, setFeedbackComment] = useState('');
-
-    const API_BASE_URL = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000';
 
     const { data, isLoading } = useQuery({
         queryKey: ['ticket', id],
@@ -171,7 +170,7 @@ const TicketDetail = () => {
                                     {ticket.attachments.map((file, idx) => (
                                         <a
                                             key={idx}
-                                            href={`${API_BASE_URL}/${file.path.replace(/\\/g, '/')}`}
+                                            href={`${API_ORIGIN}/${file.path.replace(/\\/g, '/')}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-800 border border-white/10 hover:border-primary-500/50 transition-colors text-sm text-slate-300"
@@ -231,7 +230,7 @@ const TicketDetail = () => {
                                                 {comment.attachments.map((file, idx) => (
                                                     <a
                                                         key={idx}
-                                                        href={`${API_BASE_URL}/${file.path.replace(/\\/g, '/')}`}
+                                                        href={`${API_ORIGIN}/${file.path.replace(/\\/g, '/')}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-dark-900 border border-white/10 text-xs text-slate-400 hover:text-white transition-colors"

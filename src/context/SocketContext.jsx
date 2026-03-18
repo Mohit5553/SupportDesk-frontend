@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { useAuth } from './AuthContext';
 import API from '../lib/axios';
+import { SOCKET_URL } from '../lib/config';
 import toast from 'react-hot-toast';
 
 const SocketContext = createContext(null);
@@ -40,7 +41,7 @@ export const SocketProvider = ({ children }) => {
     useEffect(() => {
         if (!user) return;
 
-        const newSocket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000', {
+        const newSocket = io(SOCKET_URL, {
             auth: { token: localStorage.getItem('token') },
             reconnection: true,
             reconnectionAttempts: 5,
