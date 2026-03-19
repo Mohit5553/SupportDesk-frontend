@@ -31,10 +31,10 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
         { to: '/tickets/new', icon: Plus, label: 'New Ticket', roles: ['customer', 'agent', 'admin'] },
         { to: '/chat', icon: MessageSquare, label: 'Live Chat', roles: ['agent', 'manager'] },
         { to: '/admin/dashboard', icon: BarChart2, label: 'Analytics', roles: ['admin', 'manager'] },
-        { to: '/admin/reports', icon: Download, label: 'Reports', roles: ['admin', 'manager'] },
+        // { to: '/admin/reports', icon: Download, label: 'Reports', roles: ['admin', 'manager'] },
         { to: '/admin/users', icon: Users, label: 'Users', roles: ['admin'] },
         { to: '/admin/categories', icon: Layers, label: 'Categories', roles: ['admin'] },
-        { to: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', roles: ['customer', 'agent', 'manager', 'admin'] },
+        // { to: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', roles: ['customer', 'agent', 'manager', 'admin'] },
         { to: '/profile', icon: Settings, label: 'Settings', roles: ['customer', 'agent', 'manager', 'admin'] },
     ];
 
@@ -46,7 +46,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
             <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/10 ${collapsed ? 'justify-center' : ''}`}>
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-violet-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary-600/30">
                     <Shield className="w-5 h-5 text-white" />
-                 </div>
+                </div>
                 {!collapsed && (
                     <div>
                         <p className="font-bold text-white text-sm leading-tight">SupportDesk</p>
@@ -69,13 +69,12 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
                     >
                         <item.icon className="w-5 h-5 flex-shrink-0" />
                         {!collapsed && <span className="flex-1">{item.label}</span>}
-                        
+
                         {item.showBadge && tasksCount > 0 && (
-                            <span className={`flex items-center justify-center bg-primary-500 text-white text-[10px] font-bold rounded-full ${
-                                collapsed 
-                                ? 'absolute top-1.5 right-1.5 w-4 h-4' 
+                            <span className={`flex items-center justify-center bg-primary-500 text-white text-[10px] font-bold rounded-full ${collapsed
+                                ? 'absolute top-1.5 right-1.5 w-4 h-4'
                                 : 'px-1.5 py-0.5 min-w-[18px]'
-                            }`}>
+                                }`}>
                                 {tasksCount > 9 ? '9+' : tasksCount}
                             </span>
                         )}
@@ -162,7 +161,7 @@ const Layout = ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const { user } = useAuth();
-    
+
     const openGlobalSearch = () => {
         window.dispatchEvent(new Event('open-global-search'));
     };
@@ -179,7 +178,7 @@ const Layout = ({ children }) => {
                 {/* Desktop Header */}
                 <header className="hidden lg:flex sticky top-0 z-30 bg-dark-950/80 backdrop-blur-xl border-b border-white/5 h-16 items-center justify-between px-8">
                     <div className="flex-1 max-w-xl">
-                        <button 
+                        <button
                             onClick={openGlobalSearch}
                             className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 rounded-xl px-4 py-2 text-sm text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary-500/50 transition-all cursor-text text-left"
                         >
