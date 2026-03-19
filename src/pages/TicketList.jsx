@@ -161,10 +161,11 @@ const TicketList = () => {
                         <select 
                             className="form-input h-9 py-1 text-sm w-40 bg-dark-900"
                             onChange={(e) => {
+                                if (bulkActionMutation.isPending) return;
                                 if(e.target.value) bulkActionMutation.mutate({ action: 'status', value: e.target.value });
                                 e.target.value = '';
                             }}
-                            disabled={bulkActionMutation.isLoading}
+                            disabled={bulkActionMutation.isPending}
                         >
                             <option value="">Change Status...</option>
                             <option value="Open">Open</option>
@@ -177,10 +178,11 @@ const TicketList = () => {
                         <select 
                             className="form-input h-9 py-1 text-sm w-40 bg-dark-900"
                             onChange={(e) => {
+                                if (bulkActionMutation.isPending) return;
                                 if(e.target.value) bulkActionMutation.mutate({ action: 'priority', value: e.target.value });
                                 e.target.value = '';
                             }}
-                            disabled={bulkActionMutation.isLoading}
+                            disabled={bulkActionMutation.isPending}
                         >
                             <option value="">Change Priority...</option>
                             <option value="Low">Low</option>

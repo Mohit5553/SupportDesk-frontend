@@ -23,6 +23,7 @@ const Login = () => {
     });
 
     const onSubmit = async (data) => {
+        if (loading) return;
         setLoading(true);
         try {
             const user = await login(data.email, data.password);

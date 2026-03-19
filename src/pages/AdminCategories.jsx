@@ -73,6 +73,7 @@ const AdminCategories = () => {
     };
 
     const handleSave = () => {
+        if (upsertCategoryMutation.isPending) return;
         if (!editData.name.trim()) return toast.error('Category name is required');
         if (editData.subcategories.some(s => !s.name.trim())) return toast.error('All subcategories must have a name');
         
@@ -204,11 +205,11 @@ const AdminCategories = () => {
                             <button onClick={() => setIsEditing(false)} className="btn-secondary px-6">Cancel</button>
                             <button 
                                 onClick={handleSave} 
-                                disabled={upsertCategoryMutation.isLoading}
+                                disabled={upsertCategoryMutation.isPending}
                                 className="btn-primary px-8 flex items-center gap-2"
                             >
                                 <Save className="w-5 h-5" /> 
-                                {upsertCategoryMutation.isLoading ? 'Saving...' : 'Save Category'}
+                                {upsertCategoryMutation.isPending ? 'Saving...' : 'Save Category'}
                             </button>
                         </div>
                     </div>

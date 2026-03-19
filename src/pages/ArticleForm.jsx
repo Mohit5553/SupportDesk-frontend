@@ -75,6 +75,7 @@ const ArticleForm = () => {
     });
 
     const onSubmit = (data) => {
+        if (mutation.isPending) return;
         mutation.mutate(data);
     };
 
@@ -210,10 +211,10 @@ const ArticleForm = () => {
                                     </button>
                                     <button
                                         type="submit"
-                                        disabled={mutation.isLoading}
+                                        disabled={mutation.isPending}
                                         className="btn-primary min-w-[160px] flex items-center justify-center gap-2"
                                     >
-                                        {mutation.isLoading ? (
+                                        {mutation.isPending ? (
                                             'Saving...'
                                         ) : (
                                             <><Save className="w-4 h-4" /> {isEdit ? 'Update Article' : 'Publish Article'}</>

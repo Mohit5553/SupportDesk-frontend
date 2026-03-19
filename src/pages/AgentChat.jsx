@@ -18,6 +18,7 @@ const AgentChat = () => {
     
     const [selectedChatId, setSelectedChatId] = useState(null);
     const [text, setText] = useState('');
+    const [isSending, setIsSending] = useState(false);
     const endOfMessagesRef = useRef(null);
 
     const { data: chats, isLoading } = useQuery({
@@ -91,8 +92,9 @@ const AgentChat = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (!text.trim() || !selectedChatId) return;
+        if (!text.trim() || !selectedChatId || isSending) return;
 
+        setIsSending(true);
         try {
             const currentText = text;
             setText('');
@@ -100,6 +102,9 @@ const AgentChat = () => {
             queryClient.invalidateQueries(['active-chats']);
         } catch (err) {
             console.error(err);
+            toast.error('Failed to send message');
+        } finally {
+            setIsSending(false);
         }
     };
 
@@ -199,23 +204,27 @@ const AgentChat = () => {
                             <div className="flex gap-2">
                                 {selectedChat.status === 'waiting' ? (
                                     <button 
-                                        onClick={() => acceptChatMutation.mutate(selectedChat._id)}
-                                        disabled={acceptChatMutation.isLoading}
+                                        onClick={() => {
+                                            if (acceptChatMutation.isPending) return;
+                                            acceptChatMutation.mutate(selectedChat._id);
+                                        }}
+                                        disabled={acceptChatMutation.isPending}
                                         className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
                                     >
-                                        <CheckCircle className="w-4 h-4" /> Accept Chat
+                                        <CheckCircle className="w-4 h-4" /> {acceptChatMutation.isPending ? 'Accepting...' : 'Accept Chat'}
                                     </button>
                                 ) : selectedChat.agent?._id === user._id ? (
                                     <button 
                                         onClick={() => {
+                                            if (endChatMutation.isPending) return;
                                             if(window.confirm('Are you sure you want to end this chat?')) {
                                                 endChatMutation.mutate(selectedChat._id);
                                             }
                                         }}
-                                        disabled={endChatMutation.isLoading}
+                                        disabled={endChatMutation.isPending}
                                         className="btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 border-red-500/30 text-red-400 hover:bg-red-500/10"
                                     >
-                                        <XOctagon className="w-4 h-4" /> End Chat
+                                        <XOctagon className="w-4 h-4" /> {endChatMutation.isPending ? 'Ending...' : 'End Chat'}
                                     </button>
                                 ) : (
                                     <div className="px-3 py-1.5 bg-white/5 rounded-lg text-xs text-slate-400 flex items-center gap-2">
@@ -273,7 +282,7 @@ const AgentChat = () => {
                                     />
                                     <button 
                                         type="submit" 
-                                        disabled={!text.trim()}
+                                        disabled={!text.trim() || isSending}
                                         className="w-12 h-12 rounded-full bg-primary-600 hover:bg-primary-500 text-white flex items-center justify-center disabled:opacity-50 transition-transform hover:scale-105 active:scale-95"
                                     >
                                         <Send className="w-5 h-5 ml-1" />

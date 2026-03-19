@@ -86,6 +86,8 @@ const NewTicket = () => {
     });
 
     const onSubmit = (data) => {
+        if (createTicketMutation.isPending) return;
+
         const formData = new FormData();
         Object.keys(data).forEach((key) => formData.append(key, data[key]));
         attachments.forEach((file) => formData.append('attachments', file));
@@ -228,10 +230,10 @@ const NewTicket = () => {
                         </button>
                         <button
                             type="submit"
-                            disabled={createTicketMutation.isLoading}
+                            disabled={createTicketMutation.isPending}
                             className="btn-primary min-w-[150px]"
                         >
-                            {createTicketMutation.isLoading ? 'Creating...' : 'Submit Ticket'}
+                            {createTicketMutation.isPending ? 'Creating...' : 'Submit Ticket'}
                         </button>
                     </div>
                 </form>

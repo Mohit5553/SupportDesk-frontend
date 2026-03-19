@@ -11,6 +11,7 @@ const ForgotPassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (loading) return;
         if (!email) {
             toast.error('Please enter your email address');
             return;

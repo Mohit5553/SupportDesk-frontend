@@ -63,14 +63,18 @@ const CustomerChatWidget = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (!text.trim() || !chat) return;
+        if (!text.trim() || !chat || loading) return;
 
+        setLoading(true);
         try {
             const currentText = text;
             setText('');
             await API.post(`/chat/${chat._id}/messages`, { text: currentText });
         } catch (err) {
             console.error(err);
+            toast.error('Failed to send message');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -78,7 +82,7 @@ const CustomerChatWidget = () => {
 
     if (!isOpen) {
         return (
-            <button 
+            <button
                 onClick={() => setIsOpen(true)}
                 className="fixed bottom-6 right-6 w-14 h-14 bg-primary-600 hover:bg-primary-500 text-white rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 z-50 cursor-pointer border border-primary-500/50"
             >
@@ -98,7 +102,7 @@ const CustomerChatWidget = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <button className="text-white/80 hover:text-white" onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }}>
-                        {isMinimized ? <Maximize2 className="w-4 h-4" /> : <X className="w-4 h-4" />} {/* Using X for close/minimize visual simplicity */}
+                        {isMinimized ? <Maximize2 className="w-4 h-4" /> : <X className="w-4 h-4" />} 
                     </button>
                 </div>
             </div>

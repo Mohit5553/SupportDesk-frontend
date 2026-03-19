@@ -93,6 +93,7 @@ const TicketDetail = () => {
 
     const onSubmitComment = (e) => {
         e.preventDefault();
+        if (addCommentMutation.isPending) return;
         if (!commentText.trim() && attachments.length === 0) return;
 
         const formData = new FormData();
@@ -105,6 +106,7 @@ const TicketDetail = () => {
 
     const onSubmitFeedback = (e) => {
         e.preventDefault();
+        if (submitFeedbackMutation.isPending) return;
         if (rating === 0) {
             toast.error('Please select a rating');
             return;
@@ -303,10 +305,10 @@ const TicketDetail = () => {
 
                                         <button
                                             type="submit"
-                                            disabled={addCommentMutation.isLoading}
+                                            disabled={addCommentMutation.isPending}
                                             className="btn-primary flex items-center gap-2 ml-auto"
                                         >
-                                            {addCommentMutation.isLoading ? 'Sending...' : (
+                                            {addCommentMutation.isPending ? 'Sending...' : (
                                                 <>
                                                     <Send className="w-4 h-4" /> Send Reply
                                                 </>
@@ -358,10 +360,10 @@ const TicketDetail = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            disabled={submitFeedbackMutation.isLoading}
+                                            disabled={submitFeedbackMutation.isPending}
                                             className="btn-primary"
                                         >
-                                            {submitFeedbackMutation.isLoading ? 'Submitting...' : 'Submit Feedback'}
+                                            {submitFeedbackMutation.isPending ? 'Submitting...' : 'Submit Feedback'}
                                         </button>
                                     </form>
                                 )}
@@ -382,8 +384,11 @@ const TicketDetail = () => {
                                     <select
                                         className="form-input bg-dark-900 border-white/5 py-1.5 text-sm w-full"
                                         value={ticket.status}
-                                        onChange={(e) => updateStatusMutation.mutate(e.target.value)}
-                                        disabled={updateStatusMutation.isLoading}
+                                        onChange={(e) => {
+                                            if (updateStatusMutation.isPending) return;
+                                            updateStatusMutation.mutate(e.target.value);
+                                        }}
+                                        disabled={updateStatusMutation.isPending}
                                     >
                                         <option value="Open">Open</option>
                                         <option value="In Progress">In Progress</option>
