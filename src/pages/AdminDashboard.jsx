@@ -190,7 +190,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                     <div className="h-[300px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <AreaChart data={mergedTrendData}>
                                 <defs>
                                     <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
@@ -217,7 +217,7 @@ const AdminDashboard = () => {
                     <div className="glass-card p-6 flex flex-col items-center">
                         <h3 className="text-sm font-semibold text-white mb-4 w-full">Priority Breakdown</h3>
                         <div className="flex-1 w-full min-h-[220px] relative">
-                            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                                 <PieChart>
                                     <Pie
                                         data={formatPriorityData}
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
                     <div className="glass-card p-6 flex flex-col items-center">
                         <h3 className="text-sm font-semibold text-white mb-4 w-full">Escalation Levels</h3>
                         <div className="flex-1 w-full min-h-[220px] relative">
-                            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                                 <BarChart data={data.byLevel}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                                     <XAxis 
@@ -275,7 +275,7 @@ const AdminDashboard = () => {
                         Tickets by Category
                     </h3>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={byCategory}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                                 <XAxis dataKey="_id" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
@@ -297,7 +297,7 @@ const AdminDashboard = () => {
                          Top 10 Subcategories
                     </h3>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={bySubcategory} layout="vertical">
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                                 <XAxis type="number" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
@@ -318,7 +318,7 @@ const AdminDashboard = () => {
                         <div className="px-2 py-1 rounded bg-red-500/10 text-red-500 text-[10px] font-bold border border-red-500/20 uppercase tracking-widest">High Risk</div>
                     </div>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={slaByCategory} layout="vertical">
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                                 <XAxis type="number" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
@@ -333,7 +333,7 @@ const AdminDashboard = () => {
                 <div className="glass-card p-6 border-l-4 border-amber-500/50">
                     <h3 className="text-lg font-semibold text-white mb-6">SLA Health by Support Level</h3>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={slaByLevel}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                                 <XAxis dataKey="_id" stroke="#94a3b8" fontSize={12} tickFormatter={(val) => `L${val}`} tickLine={false} axisLine={false} />
@@ -383,7 +383,7 @@ const AdminDashboard = () => {
                         </h3>
                     </div>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={avgResolutionTimeByCategory} layout="vertical">
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                                 <XAxis type="number" stroke="#94a3b8" fontSize={11} />
@@ -409,7 +409,7 @@ const AdminDashboard = () => {
                         </h3>
                     </div>
                     <div className="h-[250px] relative">
-                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <BarChart data={formatPriorityResolution} layout="vertical">
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                                 <XAxis type="number" stroke="#94a3b8" fontSize={11} />
