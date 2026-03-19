@@ -29,12 +29,12 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
         { to: '/tickets', icon: Ticket, label: 'Tickets', roles: ['customer', 'agent', 'manager', 'admin'], showBadge: true },
         { to: '/kanban', icon: Layers, label: 'Kanban Board', roles: ['agent', 'manager', 'admin'] },
         { to: '/tickets/new', icon: Plus, label: 'New Ticket', roles: ['customer', 'agent', 'admin'] },
-        { to: '/chat', icon: MessageSquare, label: 'Live Chat', roles: ['agent', 'manager'] },
+        // { to: '/chat', icon: MessageSquare, label: 'Live Chat', roles: ['agent', 'manager'] },
         { to: '/admin/dashboard', icon: BarChart2, label: 'Analytics', roles: ['admin', 'manager'] },
         // { to: '/admin/reports', icon: Download, label: 'Reports', roles: ['admin', 'manager'] },
         { to: '/admin/users', icon: Users, label: 'Users', roles: ['admin'] },
         { to: '/admin/categories', icon: Layers, label: 'Categories', roles: ['admin'] },
-        // { to: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', roles: ['customer', 'agent', 'manager', 'admin'] },
+        { to: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', roles: ['customer', 'agent', 'manager', 'admin'] },
         { to: '/profile', icon: Settings, label: 'Settings', roles: ['customer', 'agent', 'manager', 'admin'] },
     ];
 
